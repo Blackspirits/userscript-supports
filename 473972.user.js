@@ -4,7 +4,7 @@
 // @name:zh-TW  YouTube JS Engine Tamer
 // @name:zh-CN  YouTube JS Engine Tamer
 // @namespace   UserScripts
-// @version     0.42.24
+// @version     0.42.25
 // @match       https://www.youtube.com/*
 // @match       https://www.youtube-nocookie.com/embed/*
 // @match       https://studio.youtube.com/live_chat*
@@ -335,6 +335,13 @@
   }
 
   let p59 = 0;
+
+  let _x69;
+  try {
+    _x69 = document.createAttributeNS("http://www.w3.org/2000/svg", "nil").addEventListener;
+  } catch (e) { }
+  const pureAddEventListener = _x69;
+  if (!pureAddEventListener) return console.warn("pureAddEventListener cannot be obtained.");
 
   const Promise = (async () => { })().constructor;
 
