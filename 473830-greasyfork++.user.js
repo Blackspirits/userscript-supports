@@ -3940,9 +3940,22 @@ if (!isInIframe) void (async () => {
                         }
                         installLinkElement.addEventListener('click', async event => {
                             if (!event?.isTrusted || !location.pathname.includes('/scripts/')) return;
-                            await delay(900);
-                            await getRafPromise();
-                            await refreshInstallLinkStatus(installLinkElement);
+                            if (
+                                installLinkElement.getAttribute('data-gfpp-install-status') === 'pending'
+                                || installLinkElement.hasAttribute('data-gfpp-status-refresh')
+                            ) return;
+
+                            installLinkElement.setAttribute('data-gfpp-status-refresh', '');
+                            try {
+                                await delay(900);
+                                await getRafPromise();
+
+                                if (installLinkElement.getAttribute('data-gfpp-install-status') !== 'pending') {
+                                    await refreshInstallLinkStatus(installLinkElement);
+                                }
+                            } finally {
+                                installLinkElement.removeAttribute('data-gfpp-status-refresh');
+                            }
                         });
                     }
 
