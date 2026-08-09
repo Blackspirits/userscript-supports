@@ -255,7 +255,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "Installieren {version}",
                                 "reinstall": "Neu installieren {version}",
                                 "update": "Aktualisieren auf {version}",
-                                "downgrade": "Zurückstufen auf {version}"
+                                "downgrade": "Zurückstufen auf {version}",
+                                "checking": "Status wird geprüft…",
+                                "unavailable": "Status nicht verfügbar"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -334,7 +336,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "Install {version}",
                                 "reinstall": "Reinstall {version}",
                                 "update": "Update to {version}",
-                                "downgrade": "Downgrade to {version}"
+                                "downgrade": "Downgrade to {version}",
+                                "checking": "Checking status…",
+                                "unavailable": "Status unavailable"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -413,7 +417,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "Instalar {version}",
                                 "reinstall": "Reinstalar {version}",
                                 "update": "Actualizar a {version}",
-                                "downgrade": "Volver a {version}"
+                                "downgrade": "Volver a {version}",
+                                "checking": "Comprobando estado…",
+                                "unavailable": "Estado no disponible"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -492,7 +498,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "Installer {version}",
                                 "reinstall": "Réinstaller {version}",
                                 "update": "Mettre à jour vers {version}",
-                                "downgrade": "Revenir à {version}"
+                                "downgrade": "Revenir à {version}",
+                                "checking": "Vérification de l’état…",
+                                "unavailable": "État indisponible"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -571,7 +579,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "Installa {version}",
                                 "reinstall": "Reinstalla {version}",
                                 "update": "Aggiorna a {version}",
-                                "downgrade": "Ripristina a {version}"
+                                "downgrade": "Ripristina a {version}",
+                                "checking": "Verifica dello stato…",
+                                "unavailable": "Stato non disponibile"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -650,7 +660,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "Instalar {version}",
                                 "reinstall": "Reinstalar {version}",
                                 "update": "Atualizar para {version}",
-                                "downgrade": "Retroceder para {version}"
+                                "downgrade": "Retroceder para {version}",
+                                "checking": "A verificar o estado…",
+                                "unavailable": "Estado indisponível"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -729,7 +741,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "Instalar {version}",
                                 "reinstall": "Reinstalar {version}",
                                 "update": "Atualizar para {version}",
-                                "downgrade": "Rebaixar para {version}"
+                                "downgrade": "Rebaixar para {version}",
+                                "checking": "Verificando status…",
+                                "unavailable": "Status indisponível"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -808,7 +822,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "Установить {version}",
                                 "reinstall": "Переустановить {version}",
                                 "update": "Обновить до {version}",
-                                "downgrade": "Откатить до {version}"
+                                "downgrade": "Откатить до {version}",
+                                "checking": "Проверка статуса…",
+                                "unavailable": "Статус недоступен"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -887,7 +903,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "安装 {version}",
                                 "reinstall": "重新安装 {version}",
                                 "update": "更新到 {version}",
-                                "downgrade": "降级到 {version}"
+                                "downgrade": "降级到 {version}",
+                                "checking": "正在检查状态…",
+                                "unavailable": "状态不可用"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -966,7 +984,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "安裝 {version}",
                                 "reinstall": "重新安裝 {version}",
                                 "update": "更新至 {version}",
-                                "downgrade": "降級至 {version}"
+                                "downgrade": "降級至 {version}",
+                                "checking": "正在檢查狀態…",
+                                "unavailable": "狀態無法取得"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -1045,7 +1065,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "{version} をインストール",
                                 "reinstall": "{version} を再インストール",
                                 "update": "{version} に更新",
-                                "downgrade": "{version} にダウングレード"
+                                "downgrade": "{version} にダウングレード",
+                                "checking": "状態を確認中…",
+                                "unavailable": "状態を確認できません"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -1124,7 +1146,9 @@ const mWindow = isInIframe || (() => {
                                 "install": "{version} 설치",
                                 "reinstall": "{version} 재설치",
                                 "update": "{version}(으)로 업데이트",
-                                "downgrade": "{version}(으)로 다운그레이드"
+                                "downgrade": "{version}(으)로 다운그레이드",
+                                "checking": "상태 확인 중…",
+                                "unavailable": "상태를 확인할 수 없음"
                         },
                         "listPanel": {
                                 "title": "{name}",
@@ -1663,6 +1687,16 @@ const mWindow = isInIframe || (() => {
             background-color: #405458;
         }
 
+        .install-link[data-gfpp-install-status="pending"],
+        .install-link[data-gfpp-install-status="unavailable"] {
+            cursor: wait;
+            opacity: .72;
+        }
+
+        .install-link[data-gfpp-install-status="unavailable"] {
+            cursor: not-allowed;
+        }
+
         div.previewable{
             display: flex;
             flex-direction: column;
@@ -2126,12 +2160,15 @@ if (!isInIframe) void (async () => {
     };
     const setupInstallLink = (button) => {
         if (!button) return null;
-        if (button.matches('a.install-link.gfpp-install-link') && !button.hasAttribute('data-gfpp-install-link')) {
+        if (button.matches('a.install-link') && !button.hasAttribute('data-gfpp-install-link')) {
             button.setAttribute('data-gfpp-install-link', '');
             // by pass install.js weird hackjack
             button.addEventListener('click', stopInstallInterception);
             button.addEventListener('mouseover', stopInstallInterception);
             button.addEventListener('touchstart', stopInstallInterception, { passive: true });
+            button.addEventListener('click', event => {
+                if (button.getAttribute('aria-disabled') === 'true') event.preventDefault();
+            });
         }
         return button;
     };
@@ -3199,18 +3236,49 @@ if (!isInIframe) void (async () => {
     const installStatusInitialTimeout = 1800;
     const installStatusLateTimeout = 10000;
 
+    const installStatusState = Object.freeze({
+        managerUnavailable: 'manager-unavailable',
+        notInstalled: 'not-installed',
+        resolved: 'resolved',
+        pending: 'pending',
+        timeout: 'timeout',
+        error: 'error'
+    });
+
+    const resolvedInstallStatus = (version) => {
+        const normalizedVersion = typeof version === 'string' ? version : '';
+        return normalizedVersion
+            ? { state: installStatusState.resolved, version: normalizedVersion }
+            : { state: installStatusState.notInstalled, version: '' };
+    };
+
+    const normalizeInstalledVersionResponse = (outcome) => {
+        if (!outcome || outcome.kind === 'error') {
+            return { state: installStatusState.error, version: '' };
+        }
+
+        const response = outcome.response;
+        if (!response?.data || !Object.prototype.hasOwnProperty.call(response.data, 'version')) {
+            return { state: installStatusState.error, version: '' };
+        }
+
+        if (typeof response.data.version !== 'string') {
+            return { state: installStatusState.error, version: '' };
+        }
+
+        return resolvedInstallStatus(response.data.version);
+    };
+
     const requestInstalledVersion = async (script, bridge, timeoutMs = installStatusInitialTimeout) => {
-        // A null bridge is an explicit "userscript manager not detected" result.
-        // This is different from a timeout, which means the status is still unknown.
-        if (!bridge) return { state: 'resolved', version: '' };
+        if (!bridge) return { state: installStatusState.managerUnavailable, version: '' };
 
         const type = Number(bridge?.data?.type);
-        if (!Number.isFinite(type)) return { state: 'resolved', version: '' };
+        if (!Number.isFinite(type)) return { state: installStatusState.error, version: '' };
 
         const mode = type % 10;
         let name = script?.name || '';
         let namespace = script?.namespace || '';
-        if (!name) return { state: 'resolved', version: '' };
+        if (!name) return { state: installStatusState.error, version: '' };
 
         if (mode === 0) {
             namespace = '';
@@ -3221,31 +3289,37 @@ if (!isInIframe) void (async () => {
                 namespace = fullScript?.namespace || '';
             }
         } else {
-            return { state: 'resolved', version: '' };
+            return { state: installStatusState.error, version: '' };
         }
 
         let requestPromise;
         try {
             requestPromise = Promise.resolve(wincomm.request('installedVersion.req', { name, namespace }))
-                .catch(() => null);
+                .then(
+                    response => ({ kind: 'response', response }),
+                    error => ({ kind: 'error', error })
+                );
         } catch (error) {
             UU.warn(error);
-            return { state: 'resolved', version: '' };
+            return { state: installStatusState.error, version: '' };
         }
 
-        const response = await withTimeout(requestPromise, timeoutMs, installStatusTimeout);
-        if (response !== installStatusTimeout) {
-            return { state: 'resolved', version: response?.data?.version || '' };
+        const outcome = await withTimeout(requestPromise, timeoutMs, installStatusTimeout);
+        if (outcome !== installStatusTimeout) {
+            return normalizeInstalledVersionResponse(outcome);
         }
 
-        // Do not turn a slow response into "not installed". Keep the original
-        // request alive and consume a late response for a bounded period.
         return {
-            state: 'pending',
+            state: installStatusState.pending,
             version: '',
-            late: withTimeout(requestPromise, installStatusLateTimeout, null)
-                .then(lateResponse => lateResponse?.data?.version || '')
-                .catch(() => '')
+            late: withTimeout(requestPromise, installStatusLateTimeout, installStatusTimeout)
+                .then(lateOutcome => lateOutcome === installStatusTimeout
+                    ? { state: installStatusState.timeout, version: '' }
+                    : normalizeInstalledVersionResponse(lateOutcome))
+                .catch(error => {
+                    UU.warn(error);
+                    return { state: installStatusState.error, version: '' };
+                })
         };
     };
 
@@ -3260,37 +3334,83 @@ if (!isInIframe) void (async () => {
             return requestInstalledVersion(script, bridge);
         }
 
-        // The bridge may simply be slow to initialize. Wait in the background
-        // and refresh the button if it becomes available later.
         return {
-            state: 'pending',
+            state: installStatusState.pending,
             version: '',
-            late: withTimeout(promiseScriptCheck, installStatusLateTimeout, null)
+            late: withTimeout(promiseScriptCheck, installStatusLateTimeout, installStatusTimeout)
                 .then(async lateBridge => {
+                    if (lateBridge === installStatusTimeout) {
+                        return { state: installStatusState.timeout, version: '' };
+                    }
                     const result = await requestInstalledVersion(script, lateBridge);
-                    return result.state === 'pending' ? result.late : result.version;
+                    return result.state === installStatusState.pending ? result.late : result;
                 })
-                .then(version => Promise.resolve(version))
-                .catch(() => '')
+                .then(result => Promise.resolve(result))
+                .catch(error => {
+                    UU.warn(error);
+                    return { state: installStatusState.error, version: '' };
+                })
         };
     };
 
-    const applyInstallStatus = (link, availableVersion, installedVersion) => {
+    const setInstallControlState = (link, state) => {
         if (!link?.isConnected) return;
+
+        const isPending = state === installStatusState.pending;
+        const isUnavailable = state === installStatusState.timeout || state === installStatusState.error;
+        const isDisabled = isPending || isUnavailable;
+
+        link.classList.toggle('install-status-checking', isPending);
+        link.setAttribute('aria-disabled', String(isDisabled));
+
+        if (isPending) {
+            link.setAttribute('aria-busy', 'true');
+            link.setAttribute('data-gfpp-install-status', 'pending');
+            link.textContent = strings.versionLabels.checking;
+        } else {
+            link.removeAttribute('aria-busy');
+            if (isUnavailable) {
+                link.setAttribute('data-gfpp-install-status', 'unavailable');
+                link.textContent = strings.versionLabels.unavailable;
+            } else {
+                link.removeAttribute('data-gfpp-install-status');
+            }
+        }
+    };
+
+    const applyInstallStatus = (link, availableVersion, status) => {
+        if (!link?.isConnected || !status) return;
+
+        if (status.state === installStatusState.pending) {
+            setInstallControlState(link, installStatusState.pending);
+            return;
+        }
+
+        if (status.state === installStatusState.timeout || status.state === installStatusState.error) {
+            setInstallControlState(link, status.state);
+            return;
+        }
+
+        const installedVersion = status.state === installStatusState.resolved
+            ? status.version
+            : '';
+
         link.textContent = installLabel(compareVersions(availableVersion, installedVersion), availableVersion);
         link.classList.remove('install-status-checking');
+        link.removeAttribute('aria-busy');
+        link.removeAttribute('aria-disabled');
         link.removeAttribute('data-gfpp-install-status');
     };
 
     const watchLateInstallStatus = (link, availableVersion, status) => {
-        if (status?.state !== 'pending' || !status.late) return false;
+        if (status?.state !== installStatusState.pending || !status.late) return false;
 
-        link?.setAttribute('data-gfpp-install-status', 'pending');
-        Promise.resolve(status.late).then(installedVersion => {
-            applyInstallStatus(link, availableVersion, installedVersion || '');
+        setInstallControlState(link, installStatusState.pending);
+        Promise.resolve(status.late).then(lateStatus => {
+            applyInstallStatus(link, availableVersion, lateStatus);
         }).catch(error => {
             UU.warn(error);
-            applyInstallStatus(link, availableVersion, '');
+            applyInstallStatus(link, availableVersion, { state: installStatusState.error, version: '' });
         });
         return true;
     };
@@ -3347,12 +3467,12 @@ if (!isInIframe) void (async () => {
         const id = Number(link.getAttribute('data-script-id')) || 0;
         if (!version || !name) return;
 
-        link.classList.add('install-status-checking');
+        setInstallControlState(link, installStatusState.pending);
         const status = await getInstalledStatus({ id, name, namespace });
         if (!link.isConnected) return;
 
         if (watchLateInstallStatus(link, version, status)) return;
-        applyInstallStatus(link, version, status.version || '');
+        applyInstallStatus(link, version, status);
     };
 
     const setDebugTag = (element, type, enabled = true) => {
@@ -3525,12 +3645,11 @@ if (!isInIframe) void (async () => {
         if (!baseScript.version) return;
         const button = addInstallButton(element, codeUrl);
         if (!button) return;
-        button.classList.add('install-status-checking');
-        button.textContent = installLabel(undefined, baseScript.version);
+        setInstallControlState(button, installStatusState.pending);
 
         const script = baseScript.name && baseScript.namespace ? baseScript : await getScriptData(scriptID);
         if (!script) {
-            button.classList.remove('install-status-checking');
+            applyInstallStatus(button, baseScript.version, { state: installStatusState.error, version: '' });
             return;
         }
 
@@ -3540,7 +3659,7 @@ if (!isInIframe) void (async () => {
         const status = await getInstalledStatus(script);
 
         if (watchLateInstallStatus(button, version, status)) return;
-        applyInstallStatus(button, version, status.version || '');
+        applyInstallStatus(button, version, status);
     };
 
 
