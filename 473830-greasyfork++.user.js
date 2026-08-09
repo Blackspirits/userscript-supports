@@ -3195,15 +3195,22 @@ if (!isInIframe) void (async () => {
         delay(timeoutMs).then(() => fallback)
     ]);
 
-    const isInstalled = async (script) => {
-        const bridge = await withTimeout(promiseScriptCheck, 1800, null);
+    const installStatusTimeout = Symbol('install-status-timeout');
+    const installStatusInitialTimeout = 1800;
+    const installStatusLateTimeout = 10000;
+
+    const requestInstalledVersion = async (script, bridge, timeoutMs = installStatusInitialTimeout) => {
+        // A null bridge is an explicit "userscript manager not detected" result.
+        // This is different from a timeout, which means the status is still unknown.
+        if (!bridge) return { state: 'resolved', version: '' };
+
         const type = Number(bridge?.data?.type);
-        if (!Number.isFinite(type)) return '';
+        if (!Number.isFinite(type)) return { state: 'resolved', version: '' };
 
         const mode = type % 10;
         let name = script?.name || '';
         let namespace = script?.namespace || '';
-        if (!name) return '';
+        if (!name) return { state: 'resolved', version: '' };
 
         if (mode === 0) {
             namespace = '';
@@ -3214,11 +3221,78 @@ if (!isInIframe) void (async () => {
                 namespace = fullScript?.namespace || '';
             }
         } else {
-            return '';
+            return { state: 'resolved', version: '' };
         }
 
-        const response = await withTimeout(wincomm.request('installedVersion.req', { name, namespace }), 1800, null);
-        return response?.data?.version || '';
+        let requestPromise;
+        try {
+            requestPromise = Promise.resolve(wincomm.request('installedVersion.req', { name, namespace }))
+                .catch(() => null);
+        } catch (error) {
+            UU.warn(error);
+            return { state: 'resolved', version: '' };
+        }
+
+        const response = await withTimeout(requestPromise, timeoutMs, installStatusTimeout);
+        if (response !== installStatusTimeout) {
+            return { state: 'resolved', version: response?.data?.version || '' };
+        }
+
+        // Do not turn a slow response into "not installed". Keep the original
+        // request alive and consume a late response for a bounded period.
+        return {
+            state: 'pending',
+            version: '',
+            late: withTimeout(requestPromise, installStatusLateTimeout, null)
+                .then(lateResponse => lateResponse?.data?.version || '')
+                .catch(() => '')
+        };
+    };
+
+    const getInstalledStatus = async (script) => {
+        const bridge = await withTimeout(
+            promiseScriptCheck,
+            installStatusInitialTimeout,
+            installStatusTimeout
+        );
+
+        if (bridge !== installStatusTimeout) {
+            return requestInstalledVersion(script, bridge);
+        }
+
+        // The bridge may simply be slow to initialize. Wait in the background
+        // and refresh the button if it becomes available later.
+        return {
+            state: 'pending',
+            version: '',
+            late: withTimeout(promiseScriptCheck, installStatusLateTimeout, null)
+                .then(async lateBridge => {
+                    const result = await requestInstalledVersion(script, lateBridge);
+                    return result.state === 'pending' ? result.late : result.version;
+                })
+                .then(version => Promise.resolve(version))
+                .catch(() => '')
+        };
+    };
+
+    const applyInstallStatus = (link, availableVersion, installedVersion) => {
+        if (!link?.isConnected) return;
+        link.textContent = installLabel(compareVersions(availableVersion, installedVersion), availableVersion);
+        link.classList.remove('install-status-checking');
+        link.removeAttribute('data-gfpp-install-status');
+    };
+
+    const watchLateInstallStatus = (link, availableVersion, status) => {
+        if (status?.state !== 'pending' || !status.late) return false;
+
+        link?.setAttribute('data-gfpp-install-status', 'pending');
+        Promise.resolve(status.late).then(installedVersion => {
+            applyInstallStatus(link, availableVersion, installedVersion || '');
+        }).catch(error => {
+            UU.warn(error);
+            applyInstallStatus(link, availableVersion, '');
+        });
+        return true;
     };
 
     const compareVersions = (v1, v2) => {
@@ -3270,10 +3344,15 @@ if (!isInIframe) void (async () => {
         const version = link.getAttribute('data-script-version') || '';
         const name = link.getAttribute('data-script-name') || '';
         const namespace = link.getAttribute('data-script-namespace') || '';
+        const id = Number(link.getAttribute('data-script-id')) || 0;
         if (!version || !name) return;
-        const installed = await isInstalled({ name, namespace });
+
+        link.classList.add('install-status-checking');
+        const status = await getInstalledStatus({ id, name, namespace });
         if (!link.isConnected) return;
-        link.textContent = installLabel(compareVersions(version, installed), version);
+
+        if (watchLateInstallStatus(link, version, status)) return;
+        applyInstallStatus(link, version, status.version || '');
     };
 
     const setDebugTag = (element, type, enabled = true) => {
@@ -3455,13 +3534,13 @@ if (!isInIframe) void (async () => {
             return;
         }
 
-        const installed = await isInstalled(script);
         const version = baseScript.version && script.version && compareVersions(baseScript.version, script.version) === 1
             ? baseScript.version
             : (script.version || baseScript.version);
-        const update = compareVersions(version, installed);
-        button.textContent = installLabel(update, version);
-        button.classList.remove('install-status-checking');
+        const status = await getInstalledStatus(script);
+
+        if (watchLateInstallStatus(button, version, status)) return;
+        applyInstallStatus(button, version, status.version || '');
     };
 
 
