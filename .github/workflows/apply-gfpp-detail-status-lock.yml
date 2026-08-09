@@ -1,0 +1,72 @@
+name: Apply Greasy Fork++ detail status lock
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.event.comment.body == '/apply-gfpp-detail-status-lock'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out patch branch
+        uses: actions/checkout@v4
+        with:
+          ref: patch-1
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Apply targeted lock
+        shell: python
+        run: |
+          from pathlib import Path
+
+          path = Path('473830-greasyfork++.user.js')
+          text = path.read_text(encoding='utf-8')
+
+          old = """                        installLinkElement.addEventListener('click', async event => {
+                            if (!event?.isTrusted || !location.pathname.includes('/scripts/')) return;
+                            await delay(900);
+                            await getRafPromise();
+                            await refreshInstallLinkStatus(installLinkElement);
+                        });
+"""
+
+          new = """                        installLinkElement.addEventListener('click', async event => {
+                            if (!event?.isTrusted || !location.pathname.includes('/scripts/')) return;
+                            if (
+                                installLinkElement.getAttribute('data-gfpp-install-status') === 'pending'
+                                || installLinkElement.hasAttribute('data-gfpp-status-refresh')
+                            ) return;
+
+                            installLinkElement.setAttribute('data-gfpp-status-refresh', '');
+                            try {
+                                await delay(900);
+                                await getRafPromise();
+
+                                if (installLinkElement.getAttribute('data-gfpp-install-status') !== 'pending') {
+                                    await refreshInstallLinkStatus(installLinkElement);
+                                }
+                            } finally {
+                                installLinkElement.removeAttribute('data-gfpp-status-refresh');
+                            }
+                        });
+"""
+
+          count = text.count(old)
+          if count != 1:
+              raise SystemExit(f'Expected exactly one listener block, found {count}')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+
+      - name: Validate and commit
+        run: |
+          node --check '473830-greasyfork++.user.js'
+          test "$(grep -o "data-gfpp-status-refresh" '473830-greasyfork++.user.js' | wc -l)" -eq 3
+          git config user.name 'Blackspirits'
+          git config user.email '11444904+Blackspirits@users.noreply.github.com'
+          git add '473830-greasyfork++.user.js'
+          git commit -m 'fix: prevent duplicate pending install-status checks' -m 'Prevent repeated detail-page clicks from starting concurrent install-status checks. Add a per-link refresh lock covering the 900 ms delay and skip refreshes while the link is already pending, while preserving retry after a terminal unavailable state.'
+          git push origin HEAD:patch-1
