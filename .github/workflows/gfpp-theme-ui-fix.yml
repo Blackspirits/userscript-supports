@@ -3,8 +3,6 @@ name: Apply settings theme UI fix
 on:
   pull_request:
     types: [opened]
-    paths:
-      - '.theme-ui-fix-trigger'
 
 permissions:
   contents: write
