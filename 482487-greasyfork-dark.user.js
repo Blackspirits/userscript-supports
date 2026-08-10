@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name                GreasyFork Dark
-// @version             0.3.33
+// @version             0.3.34
 // @license             MIT
 // @author              CY Fung
 // @name:ja             GreasyFork Dark ダークモード
@@ -4014,7 +4014,7 @@ select:-webkit-autofill:focus {
     const mo = new MutationObserver(() => {
         const head = document.head;
         if (!head) return;
-        const css = head.querySelector('link[rel="stylesheet"][href*="/vite/assets/application-"][href*=".css"][media="screen"]');
+        const css = head.querySelector('link[rel="stylesheet"][href*="/vite/assets/application-"][href*=".css"]');
         if (!css || css.parentNode !== head) return;
         mo.disconnect();
         mo.takeRecords();
