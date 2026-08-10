@@ -1,0 +1,51 @@
+name: Apply settings theme UI fix target
+
+on:
+  pull_request_target:
+    types: [opened]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/settings-theme
+          fetch-depth: 0
+      - name: Apply UI patch
+        run: python .github/scripts/apply-gfpp-theme-ui.py
+      - name: Verify
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          source = Path('473830-greasyfork++.user.js').read_text(encoding='utf-8')
+          css = source.split('    const settingsCSS = `', 1)[1].split('    const pageCSS = `', 1)[0]
+          checks = {
+              'all section headers normalized': '#greasyfork-plus .section_header_holder[class]' in css,
+              'no positional section_2 styling': 'section_2' not in css,
+              'dark background forced': 'background: var(--gfpp-bg) !important;' in css,
+              'panel foreground forced': 'color: var(--gfpp-text) !important;' in css,
+              'filter indentation removed': 'margin-left: 0 !important;' in css,
+              'native theme select preserved': '#greasyfork-plus_field_theme[class]' in css,
+              'no custom picker': '.gfpp-theme-select' not in source,
+          }
+          failed = [name for name, ok in checks.items() if not ok]
+          if failed:
+              raise SystemExit('failed: ' + ', '.join(failed))
+          print('settings UI checks passed:', len(checks))
+          PY
+          node --check '473830-greasyfork++.user.js'
+          git diff --check
+      - name: Commit
+        shell: bash
+        run: |
+          git config user.name 'BlackSpirits'
+          git config user.email 'BlackSpirits@users.noreply.github.com'
+          git add '473830-greasyfork++.user.js'
+          git diff --cached --stat
+          git commit -m 'fix: unify settings theme colors and sections'
+          git push origin HEAD:feat/settings-theme
