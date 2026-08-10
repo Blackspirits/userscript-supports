@@ -1,0 +1,123 @@
+name: Apply settings theme patch
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.event.pull_request.head.ref == 'tmp/theme-action-trigger-2'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/settings-theme
+          fetch-depth: 0
+
+      - name: Add isolated settings theme support
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('473830-greasyfork++.user.js')
+          source = path.read_text(encoding='utf-8')
+
+          def replace_once(old, new, label):
+              global source
+              count = source.count(old)
+              if count != 1:
+                  raise SystemExit(f'{label}: expected 1 match, found {count}')
+              source = source.replace(old, new, 1)
+
+          replace_once(
+              """    const fields = {\n        hideBlacklistedScripts: {""",
+              """    const fields = {\n        theme: {\n            label: '', section: [''], labelPos: 'left', type: 'select',\n            options: ['auto', 'light', 'dark'], default: 'auto'\n        },\n        hideBlacklistedScripts: {""",
+              'theme field'
+          )
+
+          replace_once(
+              """        const labels = ui.fields;\n\n        localizedFields.hideBlacklistedScripts.label = labels.hideBlacklistedScripts;""",
+              """        const labels = ui.fields;\n\n        localizedFields.theme.label = labels.theme;\n        localizedFields.theme.section = [ui.sections.appearance];\n        localizedFields.hideBlacklistedScripts.label = labels.hideBlacklistedScripts;""",
+              'localized theme field'
+          )
+
+          replace_once(
+              """        html {\n        color: #222;\n        background: #f9f9f9;\n        }""",
+              """        :root {\n            color-scheme: light;\n            --gfpp-bg: #f9f9f9;\n            --gfpp-text: #222;\n            --gfpp-surface: rgba(127,127,127,0.05);\n            --gfpp-border: rgba(127,127,127,0.5);\n            --gfpp-section-start: #670000;\n            --gfpp-section-end: #990000;\n            --gfpp-section-text: #fff;\n            --gfpp-accent: #670000;\n            --gfpp-dev-bg: #000;\n            --gfpp-dev-text: #eee;\n            --gfpp-control-bg: #fff;\n            --gfpp-control-text: #222;\n        }\n\n        :root[data-gfpp-theme=\"dark\"] {\n            color-scheme: dark;\n            --gfpp-bg: #161616;\n            --gfpp-text: #e8e6e3;\n            --gfpp-surface: rgba(255,255,255,0.05);\n            --gfpp-border: rgba(255,255,255,0.28);\n            --gfpp-section-start: #691010;\n            --gfpp-section-end: #8f1a1a;\n            --gfpp-section-text: #fff;\n            --gfpp-accent: #ff8a8a;\n            --gfpp-dev-bg: #0b0b0b;\n            --gfpp-dev-text: #eee;\n            --gfpp-control-bg: #242424;\n            --gfpp-control-text: #f2f2f2;\n        }\n\n        html, body {\n            color: var(--gfpp-text);\n            background: var(--gfpp-bg);\n        }\n\n        #greasyfork-plus select,\n        #greasyfork-plus textarea,\n        #greasyfork-plus input:not([type=\"checkbox\"]):not([type=\"radio\"]) {\n            color: var(--gfpp-control-text);\n            background: var(--gfpp-control-bg);\n            border-color: var(--gfpp-border);\n        }\n        #greasyfork-plus input[type=\"checkbox\"],\n        #greasyfork-plus input[type=\"radio\"] {\n            accent-color: var(--gfpp-accent);\n        }""",
+              'settings palette'
+          )
+
+          replace_once(
+              """            background-color:#670000;\n            background-image:linear-gradient(#670000,#900);\n            border:1px solid transparent;\n            color:#fff""",
+              """            background-color:var(--gfpp-section-start);\n            background-image:linear-gradient(var(--gfpp-section-start),var(--gfpp-section-end));\n            border:1px solid transparent;\n            color:var(--gfpp-section-text)""",
+              'section header colors'
+          )
+
+          replace_once(
+              """        #greasyfork-plus .field_label[class] b{\n            color:#670000\n        }""",
+              """        #greasyfork-plus .field_label[class] b{\n            color:var(--gfpp-accent)\n        }""",
+              'field accent'
+          )
+
+          replace_once(
+              """            background: rgba(127,127,127,0.05);\n            border: 1px solid rgba(127,127,127,0.5);""",
+              """            background: var(--gfpp-surface);\n            border: 1px solid var(--gfpp-border);""",
+              'settings surface'
+          )
+
+          replace_once(
+              """            background: #000;\n            color: #eee;""",
+              """            background: var(--gfpp-dev-bg);\n            color: var(--gfpp-dev-text);""",
+              'developer section colors'
+          )
+
+          replace_once(
+              """    function hiddenListStrToArr(str) {\n        if (!str || typeof str !== 'string') str = '';\n        return [...new Set(str ? numberArr(str.split(',').map(e => parseInt(e))) : [])];\n    }\n\n    let settingsSessionSnapshot = null;""",
+              """    function hiddenListStrToArr(str) {\n        if (!str || typeof str !== 'string') str = '';\n        return [...new Set(str ? numberArr(str.split(',').map(e => parseInt(e))) : [])];\n    }\n\n    const detectPageTheme = () => {\n        const parseRgb = value => {\n            const match = /rgba?\\(\\s*(\\d+(?:\\.\\d+)?)\\s*[, ]\\s*(\\d+(?:\\.\\d+)?)\\s*[, ]\\s*(\\d+(?:\\.\\d+)?)/i.exec(String(value || ''));\n            return match ? [Number(match[1]), Number(match[2]), Number(match[3])] : null;\n        };\n\n        for (const element of [window.document.body, window.document.documentElement]) {\n            if (!element) continue;\n            const background = window.getComputedStyle(element).backgroundColor;\n            if (!background || background === 'transparent' || /rgba\\([^)]*,\\s*0(?:\\.0+)?\\s*\\)$/i.test(background)) continue;\n            const rgb = parseRgb(background);\n            if (!rgb) continue;\n            const luminance = 0.2126 * rgb[0] + 0.7152 * rgb[1] + 0.0722 * rgb[2];\n            return luminance < 128 ? 'dark' : 'light';\n        }\n\n        return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';\n    };\n\n    const resolveSettingsTheme = (preference = 'auto') =>\n        preference === 'light' || preference === 'dark' ? preference : detectPageTheme();\n\n    let settingsSessionSnapshot = null;""",
+              'theme resolver'
+          )
+
+          replace_once(
+              """                clearSettingsEventListeners();\n                snapshotSettingsSession();\n                const textarea = document.querySelector(`#${id}_field_hiddenList`);""",
+              """                clearSettingsEventListeners();\n                snapshotSettingsSession();\n\n                const themeSelect = document.querySelector(`#${id}_field_theme`);\n                const applySettingsTheme = () => {\n                    const preference = String(themeSelect?.value || gmc.get('theme') || 'auto');\n                    document.documentElement.dataset.gfppTheme = resolveSettingsTheme(preference);\n                };\n                if (themeSelect) {\n                    const themeLabels = ui.themeOptions || locales.en.settings.themeOptions;\n                    for (const option of themeSelect.options) {\n                        if (themeLabels[option.value]) option.textContent = themeLabels[option.value];\n                    }\n                    addSettingsEventListener(themeSelect, 'input', applySettingsTheme);\n                    addSettingsEventListener(themeSelect, 'change', applySettingsTheme);\n                }\n                const colorScheme = window.matchMedia?.('(prefers-color-scheme: dark)');\n                if (colorScheme) {\n                    addSettingsEventListener(colorScheme, 'change', () => {\n                        if ((themeSelect?.value || gmc.get('theme') || 'auto') === 'auto') applySettingsTheme();\n                    });\n                }\n                applySettingsTheme();\n\n                const textarea = document.querySelector(`#${id}_field_hiddenList`);""",
+              'theme preview lifecycle'
+          )
+
+          path.write_text(source, encoding='utf-8')
+          PY
+
+      - name: Verify theme scope
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          source = Path('473830-greasyfork++.user.js').read_text(encoding='utf-8')
+          checks = {
+              'one theme field': source.count("options: ['auto', 'light', 'dark'], default: 'auto'") == 1,
+              'localized theme label': source.count('localizedFields.theme.label = labels.theme;') == 1,
+              'dark theme selector': source.count(':root[data-gfpp-theme="dark"]') == 1,
+              'site-aware auto resolver': source.count('const resolveSettingsTheme') == 1,
+              'native select preview': source.count("addSettingsEventListener(themeSelect, 'change', applySettingsTheme);") == 1,
+              'no custom picker': '.gfpp-theme-select' not in source,
+          }
+          failed = [name for name, ok in checks.items() if not ok]
+          if failed:
+              raise SystemExit('failed: ' + ', '.join(failed))
+          print('theme scope checks passed:', len(checks))
+          PY
+          node --check '473830-greasyfork++.user.js'
+          git diff --check
+
+      - name: Commit isolated change
+        shell: bash
+        run: |
+          git config user.name 'BlackSpirits'
+          git config user.email 'BlackSpirits@users.noreply.github.com'
+          git add '473830-greasyfork++.user.js'
+          git diff --cached --stat
+          git commit -m 'feat: add settings theme preference'
+          git push origin HEAD:feat/settings-theme
