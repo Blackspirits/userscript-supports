@@ -1,11 +1,13 @@
 ---
 name: pick-invariant
 description: >
-  Use for generic reasoning when a decision is unresolved, an exploration needs narrowing, an invariant
-  needs auditing, or an owner-identified gap needs investigation. Preserve target, authority, and
-  semantics; retain only observable distinctions that can change the target decision, prefer the cheapest
-  sufficient observation, refine only on an explicit witness, and load specialist doctrine only when
-  its trigger is material.
+  Default first-line, domain-agnostic meta-reasoning control for choosing the right path. Use it to
+  resolve an undecided choice, narrow an exploration, audit an invariant, investigate an
+  owner-identified gap, or determine whether a validated owner can be used directly when no Pick
+  exploration or audit is requested. Preserve target, authority, and semantics; retain only observable
+  distinctions that can change the target decision; prefer the cheapest sufficient observation or
+  representation; refine only on an explicit witness; and load specialist doctrine only when its
+  trigger is material.
 ---
 
 # PickInvariant
