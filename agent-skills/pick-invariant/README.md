@@ -1,7 +1,8 @@
 # PickInvariant
 
 PickInvariant is a runtime reasoning skill for unresolved decisions, bounded exploration, invariant
-audits, and owner-identified gaps. The default kernel stays compact and loads specialist references
+audits, and owner-identified gaps. The runtime skill strengthens audit falsification and residual-search behavior
+without changing the Pick/decision-quotient core. The default kernel stays compact and loads specialist references
 only when their material trigger fires.
 
 ## Runtime contents

@@ -137,22 +137,26 @@ extensions require their own assumptions.
 
 ## 6. Progressive loading — activation semantics are part of the algorithm
 
-Load detail only when the corresponding trigger is material:
+Load only on material triggers:
 
 - explore/rigor -> `references/exploration_and_adaptive_rigor.md`
 - Pick theorem/roles -> `references/pick_abstraction.md`, `references/pick_representation.md`
-- mathematical architecture/provenance explanation or audit -> `references/theorem_provenance.md`
-- merge, continuation/channel equivalence, or `MINIMAL` -> `references/decision_quotients.md`
-- audit/coverage -> `references/audit_and_contrast.md`, `references/review_scope_and_coverage.md`
+- architecture/provenance -> `references/theorem_provenance.md`
+- merge/continuation/channel equivalence or `MINIMAL` -> `references/decision_quotients.md`
+- audit/coverage -> `references/audit_and_contrast.md`, `references/review_scope_and_coverage.md`; software DELTA/FULL -> `references/software_audit_adapter.md`
+- audit near-miss/residual -> `references/audit_search_policy.md`
+- canonicalization seam -> `references/canonicalization_seam.md`
+- partial commit -> `references/partial_commit.md`
+- interaction-heavy audit -> `references/interaction_contrasts.md`
 - derivation/failure -> `references/procedure_gaps.md`, `references/binding_and_rebinding.md`, `references/execution_and_failures.md`
-- architecture/procedure resolution -> `references/architecture.md`, `integration/procedure_resolution.md`
-- seam/history/time reasoning -> `references/seams_information_and_time.md`
-- material probability/measure -> `references/probability_semantics.md`
+- architecture/resolution -> `references/architecture.md`, `integration/procedure_resolution.md`
+- seam/history/time -> `references/seams_information_and_time.md`
+- probability/measure -> `references/probability_semantics.md`
 - composition/observation-value/refinement -> `references/composition_and_refinement.md`
-- specialized null-conditioning, symmetry, Ehrhart, or local/global gate -> `integration/specialized_gates.md`
-- embedded-prompt or presentation design/audit -> `references/prompt_and_presentation.md`
-- robustness work -> `references/robustness.md`
-- output/calibration as needed -> `templates/`, `examples/`
+- null-conditioning/symmetry/Ehrhart/local-global gate -> `integration/specialized_gates.md`
+- prompt/presentation -> `references/prompt_and_presentation.md`
+- robustness -> `references/robustness.md`
+- output/calibration -> `templates/`, `examples/`
 
-Mandatory load triggers are algorithmic. If required detail is unavailable, narrow or downgrade the
+Triggers are algorithmic. If required detail is unavailable, narrow or downgrade the
 conclusion rather than pretending it was applied.

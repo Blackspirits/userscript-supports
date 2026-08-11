@@ -6,7 +6,10 @@ semantic families and high-yield probes; it does not replace the universal `P/I/
 ## 1. Scope and coverage gate
 
 Declare `FOCUSED_AUDIT`, `DELTA_AUDIT`, or `FULL_AUDIT` before pinpointing. Then build a coverage
-map. A software audit is not complete merely because one bug is confirmed.
+map. A software audit is not complete merely because one bug is confirmed. For `DELTA_AUDIT` or
+`FULL_AUDIT`, after the primary mechanism is resolved, ensure the universal audit's bounded
+`ORTHOGONAL_RESIDUAL` pass considers a reachable mechanism family not explained by that primary
+invariant.
 
 ```text
 family:
@@ -68,7 +71,9 @@ Candidate families include:
 - registration narrowing versus runtime enforcement and negative claims through indirect callbacks.
 
 A syntactic transformation is not a finding until an admissible, reachable, oracle-bound contrast
-or proof shows different required behavior.
+or proof shows different required behavior. When the same identifier/path/name crosses multiple
+normalizers, validators, stores, or comparisons, activate `CANONICALIZATION_SEAM`, load `references/canonicalization_seam.md`, and compare their
+equivalence classes rather than merely checking the final string/value.
 
 ## 4. Temporal, concurrency, and state-machine probes
 
@@ -93,6 +98,10 @@ duplicate-action behavior:
 late-result behavior:
 ```
 
+Whenever a mutation has multiple externally visible steps that may fail between effects, activate
+`PARTIAL_COMMIT_TRIGGER`, load `references/partial_commit.md`, and inspect failure after each decision-relevant prefix for invariant
+preservation, rollback/compensation, or explicitly acceptable partial state.
+
 Whenever retries, late refreshes, observers, listeners, or async status checks are added, ask:
 
 ```text
@@ -105,6 +114,11 @@ is there an in-flight identity or generation guard?
 Concurrency is not automatically `χ`; use `B` when one typed or temporal seam reconstructs the
 decision. Use `χ` only for residual global cycles, shared ownership, reachability, or ordering that
 cannot be reconstructed locally or at a direct boundary.
+
+When correctness depends on several independently varying material factors and one-at-a-time probes
+can miss combinations, activate `INTERACTION_TRIGGER` and load
+`references/interaction_contrasts.md`. Use pairwise/t-way contrast selection only to the order
+justified by the target; it is not a cleanliness proof for untested higher-order combinations.
 
 ## 5. Preservation and evidence
 
