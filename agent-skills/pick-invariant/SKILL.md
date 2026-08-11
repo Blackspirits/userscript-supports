@@ -1,12 +1,14 @@
 ---
 name: pick-invariant
 description: >
-  Principle-driven adaptive reasoning for unresolved decisions, exploration, invariant audits, and
-  owner-identified gaps. Pick is the dominant structural grammar; retain only observable,
-  target-relevant distinctions and load specialist doctrine only when its trigger is material.
+  Use for generic reasoning when a decision is unresolved, an exploration needs narrowing, an invariant
+  needs auditing, or an owner-identified gap needs investigation. Preserve target, authority, and
+  semantics; retain only observable distinctions that can change the target decision, prefer the cheapest
+  sufficient observation, refine only on an explicit witness, and load specialist doctrine only when
+  its trigger is material.
 ---
 
-# PickInvariant v11.1
+# PickInvariant
 
 Govern every path by:
 
@@ -32,7 +34,7 @@ or merging it collapses an acceptance-changing contrast or violates a bound requ
 
 ## 1. Authority and mode
 
-Bind supplied artifact/version before exact-conformance claims; else mark `INFERRED_PICKINVARIANT`.
+Bind supplied artifact identity before exact-conformance claims; else mark `INFERRED_PICKINVARIANT`.
 
 ```text
 explicit authority > validated owner > validated extension > PickInvariant derivation > preference
@@ -133,7 +135,7 @@ extensions require their own assumptions.
 
 ## 6. Progressive loading — activation semantics are part of the algorithm
 
-Load detail only when the corresponding v11 trigger is material:
+Load detail only when the corresponding trigger is material:
 
 - explore/rigor -> `references/exploration_and_adaptive_rigor.md`
 - Pick theorem/roles -> `references/pick_abstraction.md`, `references/pick_representation.md`
@@ -148,8 +150,7 @@ Load detail only when the corresponding v11 trigger is material:
 - specialized null-conditioning, symmetry, Ehrhart, or local/global gate -> `integration/specialized_gates.md`
 - embedded-prompt or presentation design/audit -> `references/prompt_and_presentation.md`
 - robustness work -> `references/robustness.md`
-- release/regression evaluation only -> `references/no_drawback_contract.md`, `eval/`
-- output/calibration as needed -> `templates/`, `examples/`, `tests/`
+- output/calibration as needed -> `templates/`, `examples/`
 
 Mandatory load triggers are algorithmic. If required detail is unavailable, narrow or downgrade the
 conclusion rather than pretending it was applied.

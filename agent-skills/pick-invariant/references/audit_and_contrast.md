@@ -46,11 +46,11 @@ target_decision:
 oracle:
 certified_domain:
 explicit_exclusions:
-artifact_identity_and_version:
+artifact_identity_and_revision:
 ```
 
-When a supplied artifact is unavailable, mark `artifact_identity_and_version` as
-`INFERRED_PICKINVARIANT`. Never reconstruct a named version from memory while claiming exact
+When a supplied artifact is unavailable, mark `artifact_identity_and_revision` as
+`INFERRED_PICKINVARIANT`. Never reconstruct a named revision from memory while claiming exact
 conformance.
 
 ## 3. Claim and target binding
@@ -149,7 +149,7 @@ Bind external compatibility, specification, policy, or reference-implementation 
 
 ```text
 oracle_identity:
-version_or_epoch:
+revision_or_epoch:
 authority:
 observation_method:
 status: OBSERVED | SPECIFIED | FIXTURE_OWNED | UNAVAILABLE | CONFLICTED

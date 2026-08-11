@@ -4,7 +4,7 @@ Load only when the target or certified gap requires the capability. The list is 
 mandatory pipeline.
 
 ## Domain/precondition probe (`P`)
-Check authority, scope, observability, freshness, schema, version, exclusions, and other conditions
+Check authority, scope, observability, freshness, schema, revision, exclusions, and other conditions
 governing applicability.
 
 ## Interior extractor (`I`)

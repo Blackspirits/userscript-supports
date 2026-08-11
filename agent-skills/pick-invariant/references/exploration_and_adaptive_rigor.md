@@ -2,8 +2,8 @@
 
 ## 1. Purpose
 
-PickInvariant v11 separates **discovery freedom** from **commitment authority**. Earlier versions
-progressively constrained reasoning to improve reliability; v10.1 preserves broad exploration in a
+PickInvariant separates **discovery freedom** from **commitment authority**. Earlier revisions
+progressively constrained reasoning to improve reliability; the inherited architecture preserves broad exploration in a
 non-authoritative sandbox while preserving strict adoption rules.
 
 The invariant is:
@@ -30,7 +30,7 @@ observed_facts:
 explicit_constraints:
 allowed_reframings:
 forbidden_commitments:
-artifact_identity_and_version:
+artifact_identity_and_revision:
 ```
 
 If the original target is ambiguous, record multiple candidate readings rather than silently choosing

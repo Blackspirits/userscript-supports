@@ -8,7 +8,7 @@ observed_facts:
 explicit_constraints:
 allowed_reframings:
 forbidden_commitments:
-artifact_identity_and_version:
+artifact_identity_and_revision:
 exploration_budget:
 stop_reason: BREADTH_SATISFIED | HYPOTHESES_SEPARATED | MISSING_OBSERVATION | BUDGET_EXHAUSTED
 

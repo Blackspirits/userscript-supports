@@ -14,7 +14,7 @@ lattice points.
 The transferable lesson is not the coefficients. It is that a global target can sometimes be
 reconstructed from a compact set of structural invariants **under explicit domain assumptions**.
 
-## 2. Why Pick remains dominant in v11
+## 2. Why Pick remains dominant in this architecture
 
 Pick supplies a useful four-role grammar:
 
@@ -28,7 +28,7 @@ B  boundary / context-dependent interface information
 This grammar remains the first structural decomposition because it distinguishes local ownership,
 interfaces, global residuals, and theorem applicability in a domain-general way.
 
-v11 adds an important limit:
+this architecture adds an important limit:
 
 > A valid Pick role tells us where a distinction belongs, not whether the target needs to retain it.
 
@@ -108,14 +108,14 @@ Do not call a fact topological merely because it is difficult.
 ## 9. Applicability as theorem precondition
 
 `P` records conditions under which the representation and decision rule are licensed: authority,
-observable state space, scope, freshness, required evidence, mutability assumptions, version/schema,
+observable state space, scope, freshness, required evidence, mutability assumptions, revision/schema,
 and exclusions.
 
 A failed precondition is an applicability failure until proven otherwise.
 
 ## 10. Valuation boundary
 
-Pick's literal formula is closely related to compositional/inclusion-exclusion structure, but v11
+Pick's literal formula is closely related to compositional/inclusion-exclusion structure, but this architecture
 requires an explicit composition gate before using that idea outside the literal domain.
 
 When local/global reconstruction involves overlaps, ask whether the target behaves as a justified

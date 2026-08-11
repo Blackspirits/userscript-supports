@@ -1,6 +1,6 @@
 # Theorem Provenance and Transfer Boundaries
 
-This file documents where v11's control principles come from. It is explanatory provenance, not an
+This file documents where this architecture's control principles come from. It is explanatory provenance, not an
 always-on execution checklist.
 
 ## Pick's Theorem — dominant structural grammar

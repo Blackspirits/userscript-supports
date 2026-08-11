@@ -28,7 +28,7 @@ G(P) = {
   caveats,
   identity,
   mutability,
-  version,
+  revision,
   lineage,
   ordering,
   atomicity,

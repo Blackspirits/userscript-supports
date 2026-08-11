@@ -25,7 +25,7 @@ Compare only target-relevant dimensions, but do not drop one merely for brevity:
 ```text
 claim          scope          authority       evidence_class
 freshness      caveats        identity        mutability
-schema         version        units           lineage/provenance
+schema         revision        units           lineage/provenance
 ordering       atomicity      completeness    durability
 uncertainty    ownership      capability      confidentiality
 ```
@@ -46,7 +46,7 @@ Use these as non-exclusive contrast generators:
 ```text
 B1  structured fact -> text -> heuristic reparse
 B2  identity/generation -> value-only comparison
-B3  versioned record -> unversioned representation
+B3  revision-tagged record -> revisionless representation
 B4  ownership/authority -> existence-only predicate
 B5  atomic producer result -> split consumer reads
 B6  terminal state -> generic completion
@@ -111,7 +111,7 @@ uncertainty.
 
 Separate:
 
-- **prospective soundness** — tag/version/fingerprint future representations so the needed
+- **prospective soundness** — tag/revision/fingerprint future representations so the needed
   distinction remains observable;
 - **retrospective recovery** — determine whether existing ambiguous records can be migrated
   from independent evidence;

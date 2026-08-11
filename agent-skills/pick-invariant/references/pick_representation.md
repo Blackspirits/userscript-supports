@@ -11,7 +11,7 @@ R_P(x) = <P(x), I(x), B(x), χ(x)>
 The fields are semantic partitions, not mandatory data structures. For machine-readable receipts,
 serialize the residual role as `CHI`; `χ` is display-only alias.
 
-v11 adds a second obligation: **classification does not imply retention**. A discovered distinction
+this architecture adds a second obligation: **classification does not imply retention**. A discovered distinction
 must also survive the target-relative quotient test.
 
 ## 2. Classification test

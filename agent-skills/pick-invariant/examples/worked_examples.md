@@ -1,4 +1,4 @@
-# Worked Examples — PickInvariant v9
+# Worked Examples
 
 These illustrate the architecture, not mandatory output formats.
 

@@ -1,51 +1,24 @@
-# PickInvariant v11.1
+# PickInvariant
 
-PickInvariant v11.1 is a **semantics-preserving compression release** of the principle-driven v11
-architecture. Pick remains the dominant structural grammar; decision-preserving quotienting remains
-the retention criterion; probability, composition, refinement, and specialized theorem families keep
-their v11.0 trigger boundaries.
+PickInvariant is a runtime reasoning skill for unresolved decisions, bounded exploration, invariant
+audits, and owner-identified gaps. The default kernel stays compact and loads specialist references
+only when their material trigger fires.
 
-The governing hierarchy is unchanged:
+## Runtime contents
 
-> Preserve the target. Preserve authority and semantics. Keep only decision-relevant distinctions.
-> Prefer the cheapest sufficient observation and representation. Refine only on an explicit witness.
+- `SKILL.md` — always-loaded activation, authority, depth, and specialist-firewall kernel.
+- `references/` — specialist doctrine loaded only when material.
+- `integration/` — procedure-resolution and specialized-gate integration rules.
+- `templates/` — optional receipts/certificates for structured internal or requested output.
+- `examples/` — calibration examples loaded only when useful.
+- `agents/` — agent metadata and default prompt.
 
-## What changed
+Evaluation scripts, simulations, CSV/JSON fixtures, archived baselines, migrations, acceptance-test
+corpora, and release-engineering manifests are intentionally excluded from the shipped runtime skill.
+They belong in the development/CI repository rather than the user-facing skill artifact.
 
-Only the always-loaded kernel was materially rewritten. Repeated explanation already available in
-lazy references was removed or compacted, while routing predicates, authority boundaries, hard
-firewalls, stop conditions, and progressive-load semantics remain in `SKILL.md`.
+## Loading rule
 
-The embedded default prompt and prompt/presentation reference are unchanged from v11.0.
-
-## Hard Pareto release gate
-
-Run:
-
-```bash
-python eval/derive_v11_0_activation_oracle.py
-python eval/activation_sim.py
-python eval/context_cost.py
-python eval/simulate.py
-python eval/static_conformance.py
-```
-
-The release compares against the packaged v11.0 baseline and requires:
-
-- protected capability and fixture-quality non-regression;
-- synthetic execution-cost and maintainability non-regression;
-- exact mode/depth/gate/lazy-reference activation equivalence;
-- non-increasing context proxy on every declared activated path;
-- at least one strict context reduction.
-
-No reasoning-quality bonus is awarded merely because v11.1 is shorter.
-
-## Evaluation scope
-
-The behavior matrix retains all 52 v11.0 fixtures. The activation suite contains those 52 mappings
-plus 36 boundary cases testing both firing and non-firing conditions for probability, quotient,
-composition, null-conditioning, symmetry, Ehrhart, observation-value, abstraction-refinement,
-local/global, and coverage gates.
-
-The claim is bounded T1 design evidence, not a live-model benchmark or proof of universal dominance.
-Context figures are word/character/byte proxies, not exact model tokens or latency.
+Progressive loading is part of the algorithm. When a mandatory specialist trigger fires, load the
+corresponding reference before making claims that depend on that doctrine. If the required reference
+is unavailable, narrow or downgrade the conclusion rather than inventing semantics.

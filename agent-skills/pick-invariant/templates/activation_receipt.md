@@ -15,7 +15,7 @@ target_decision:
 basis: explicit_audit | no_owner | gap_certificate | owner_adequate
 oracle:
 certified_domain:
-artifact_identity_and_version:
+artifact_identity_and_revision:
 gap_certificate: path-or-none
 transition_authority: owner_adoption | higher_explicit_authority | no_owner | none
 allowed_outputs:

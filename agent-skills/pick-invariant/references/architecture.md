@@ -1,4 +1,4 @@
-# Architecture: Principle-Driven PickInvariant v11
+# Architecture: Principle-Driven PickInvariant
 
 ## 1. Dominant theorem and control stack
 
@@ -9,7 +9,7 @@ separates applicability, local semantics, interfaces, and residual non-local str
 P / I / B / χ
 ```
 
-Dominance does not mean exclusivity. v11 uses a layered control stack:
+Dominance does not mean exclusivity. this architecture uses a layered control stack:
 
 ```text
 Pick                  -> where a candidate distinction lives
